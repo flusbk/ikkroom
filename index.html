@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ikkcloudroom</title>
+    <style>
+        @font-face {
+            font-family: 'MyFont';
+            src: url('https://jsd.onmicrosoft.cn/gh/flusbk/font/letters%202.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 5vh;
+            font-family: 'MyFont', 'Georgia', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        /* ===== 页面容器 ===== */
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        /* ===== 主页面样式 ===== */
+        .avatar-wrapper {
+            width: 165px;
+            height: 165px;
+            border-radius: 50%;
+            padding: 2px;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 1px #d1d5db;
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 50px;
+            font-weight: 900;
+            color: #000000;
+            margin-top: 12px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 25px;
+            color: #666B72;
+            font-weight: bold;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .room-name {
+            font-size: 35px;
+            font-weight: 900;
+            color: #000000;
+            margin-top: 30px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle2 {
+            font-size: 30px;
+            color: #000000;
+            font-weight: normal;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle3 {
+            font-size: 30px;
+            color: #666B72;
+            font-weight: normal;
+            margin-top: 2px;
+            letter-spacing: 1px;
+        }
+
+        /* 主页框通用 */
+        .box {
+            width: 900px;
+            background-color: #ffffff;
+            border: 2px solid #ECECEC;
+            border-radius: 30px;
+            margin-top: 16px;
+            position: relative;
+            box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+        }
+
+        .box1 {
+            min-height: 450px;
+            padding: 30px 35px;
+        }
+
+        .box1 .box-title {
+            font-weight: bold;
+            color: #000000;
+            font-size: 35px;
+            margin-bottom: 16px;
+        }
+
+        .box1 .box-text {
+            font-size: 30px;
+            color: #666B72;
+            line-height: 1.8;
+        }
+
+        .box1 .box-footer {
+            font-size: 25px;
+            color: #9DA2A9;
+            margin-top: 30px;
+        }
+
+        .box2, .box3, .box4 {
+            min-height: 150px;
+            padding: 25px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .box2:hover, .box3:hover, .box4:hover {
+            background-color: #f9f9f9;
+        }
+
+        .box2 .info, .box3 .info, .box4 .info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .box2 .info .title, .box3 .info .title, .box4 .info .title {
+            font-weight: bold;
+            color: #000000;
+            font-size: 30px;
+        }
+
+        .box2 .info .desc, .box3 .info .desc, .box4 .info .desc {
+            font-size: 25px;
+            color: #666B72;
+        }
+
+        .box2 .badge, .box3 .badge, .box4 .badge {
+            background-color: #FBFBFB;
+            border: 2px solid #ECECEC;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 24px;
+            color: #666B72;
+            white-space: nowrap;
+        }
+
+        .cloud-room {
+            font-size: 25px;
+            color: #9DA2A9;
+            margin-top: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== 子页面样式 ===== */
+        .header-box {
+            width: 900px;
+            min-height: 80px;
+            background-color: #ffffff;
+            border: 2px solid #ECECEC;
+            border-radius: 30px;
+            margin-top: 16px;
+            box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .back-home {
+            font-size: 25px;
+            color: #666B72;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .back-home:hover {
+            color: #000000;
+        }
+
+        .header-title {
+            font-weight: bold;
+            color: #000000;
+            font-size: 35px;
+            margin: 0;
+        }
+
+        .search-box {
+            width: 900px;
+            min-height: 80px;
+            background-color: #ffffff;
+            border: 2px solid #ECECEC;
+            border-radius: 30px;
+            margin-top: 16px;
+            box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #ECECEC;
+            border-radius: 50px;
+            font-size: 23px;
+            font-family: inherit;
+            outline: none;
+            min-width: 150px;
+        }
+
+        .search-box input:focus {
+            border-color: #666B72;
+        }
+
+        .search-box .capsule-btn {
+            padding: 12px 28px;
+            border: 2px solid #ECECEC;
+            border-radius: 50px;
+            background-color: #FBFBFB;
+            font-size: 23px;
+            color: #666B72;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .search-box .capsule-btn:hover {
+            background-color: #ECECEC;
+        }
+
+        .file-box {
+            width: 900px;
+            min-height: 150px;
+            background-color: #ffffff;
+            border: 2px solid #ECECEC;
+            border-radius: 30px;
+            margin-top: 16px;
+            box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+            padding: 30px 35px;
+        }
+
+        .file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            border: 2px solid #ECECEC;
+            border-radius: 16px;
+            background-color: #ffffff;
+        }
+
+        .file-item .file-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .file-item .file-name {
+            font-size: 25px;
+            color: #000000;
+        }
+
+        .file-item .file-meta {
+            font-size: 21px;
+            color: #9DA2A9;
+        }
+
+        .file-item .download-btn {
+            padding: 8px 20px;
+            border: 2px solid #ECECEC;
+            border-radius: 50px;
+            background-color: #FBFBFB;
+            font-size: 21px;
+            color: #666B72;
+            text-decoration: none;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: inline-block;
+            font-family: inherit;
+        }
+
+        .file-item .download-btn:hover {
+            background-color: #ECECEC;
+        }
+
+        .count-badge {
+            font-size: 23px;
+            color: #9DA2A9;
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .no-result {
+            font-size: 25px;
+            color: #9DA2A9;
+            text-align: center;
+            padding: 40px 0;
+            display: none;
+        }
+
+        .empty-tip {
+            font-size: 25px;
+            color: #9DA2A9;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        /* ===== 切换按钮 ===== */
+        .nav-btn {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- 主页面 -->
+    <!-- ============================================================ -->
+    <div class="page active" id="page-home">
+        <div class="avatar-wrapper">
+            <img src="https://i.postimg.cc/SNMsSWm4/E7D16090-CFD3-4967-A37D-C5213E229B62.jpg" alt="头像">
+        </div>
+        <div class="name">ikk</div>
+        <div class="subtitle">仅供观赏アーカイブ / for viewing only</div>
+        <div class="room-name">イククルーム</div>
+        <div class="subtitle2">りんご、アンドロイドの保管室です。</div>
+        <div class="subtitle3">soft archive / ios document / private storage</div>
+
+        <div class="box box1">
+            <div class="box-title">ご案内</div>
+            <div class="box-text">
+                仅供イッコ雲室内成员个人使用。<br>
+                禁止商用、搬运、二传、倒卖及二次发布。<br>
+                系统请自行改适配。<br>
+                不受理转系统；有需求请善用搜索，微博内uu分享的教程。
+            </div>
+            <div class="box-footer">for personal use only · repost / resale prohibited</div>
+        </div>
+
+        <div class="box box2" onclick="switchPage('skin')">
+            <div class="info">
+                <span class="title">Skin Room</span>
+                <span class="desc">ios皮肤文件</span>
+            </div>
+            <span class="badge">1 files</span>
+        </div>
+
+        <div class="box box3" onclick="switchPage('android')">
+            <div class="info">
+                <span class="title">Android Room</span>
+                <span class="desc">安卓皮肤文件</span>
+            </div>
+            <span class="badge">0 files</span>
+        </div>
+
+        <div class="box box4" onclick="switchPage('font')">
+            <div class="info">
+                <span class="title">Font Room</span>
+                <span class="desc">字体文件</span>
+            </div>
+            <span class="badge">0 files</span>
+        </div>
+
+        <div class="cloud-room">Cloud Room · members only</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- Skin Room 子页面 -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-skin">
+        <div class="header-box">
+            <button class="back-home" onclick="switchPage('home')">← back home</button>
+            <div class="header-title">Skin Room</div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="skinSearch" placeholder="搜索：皮肤名 / 彩融底" oninput="filterSkin()">
+            <span class="capsule-btn" onclick="clearSkinSearch()">清空</span>
+        </div>
+
+        <div class="file-box">
+            <div class="file-list" id="skinList">
+                <div class="file-item" data-name="天使心跳是来自天国的白色音符" data-meta="@作者名">
+                    <div class="file-info">
+                        <span class="file-name">天使心跳是来自天国的白色音符</span>
+                        <span class="file-meta">@作者名</span>
+                    </div>
+                    <a href="https://raw.githubusercontent.com/flusbk/flusbk.github.io/main/天使心跳是来自天国的白的音符.bdi" target="_blank" class="download-btn">下载</a>
+                </div>
+            </div>
+            <div class="no-result" id="skinNoResult">🔍 未找到文件</div>
+            <div class="count-badge" id="skinCount">共 1 个文件</div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- Android Room 子页面 -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-android">
+        <div class="header-box">
+            <button class="back-home" onclick="switchPage('home')">← back home</button>
+            <div class="header-title">Android Room</div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="androidSearch" placeholder="搜索：皮肤名 / 彩融底" oninput="filterAndroid()">
+            <span class="capsule-btn" onclick="clearAndroidSearch()">清空</span>
+        </div>
+
+        <div class="file-box">
+            <div class="file-list" id="androidList">
+                <div class="empty-tip">📂 暂无文件</div>
+            </div>
+            <div class="no-result" id="androidNoResult">🔍 未找到文件</div>
+            <div class="count-badge" id="androidCount">共 0 个文件</div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- Font Room 子页面 -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-font">
+        <div class="header-box">
+            <button class="back-home" onclick="switchPage('home')">← back home</button>
+            <div class="header-title">Font Room</div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="fontSearch" placeholder="搜索：字体名 / 标签" oninput="filterFont()">
+            <span class="capsule-btn" onclick="clearFontSearch()">清空</span>
+        </div>
+
+        <div class="file-box">
+            <div class="file-list" id="fontList">
+                <div class="empty-tip">📂 暂无文件</div>
+            </div>
+            <div class="no-result" id="fontNoResult">🔍 未找到文件</div>
+            <div class="count-badge" id="fontCount">共 0 个文件</div>
+        </div>
+    </div>
+
+    <script>
+        // ===== 页面切换 =====
+        function switchPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            if (page === 'home') {
+                document.getElementById('page-home').classList.add('active');
+            } else if (page === 'skin') {
+                document.getElementById('page-skin').classList.add('active');
+                // 重置搜索
+                document.getElementById('skinSearch').value = '';
+                filterSkin();
+            } else if (page === 'android') {
+                document.getElementById('page-android').classList.add('active');
+                document.getElementById('androidSearch').value = '';
+                filterAndroid();
+            } else if (page === 'font') {
+                document.getElementById('page-font').classList.add('active');
+                document.getElementById('fontSearch').value = '';
+                filterFont();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // ===== Skin Room 搜索 =====
+        function filterSkin() {
+            const keyword = document.getElementById('skinSearch').value.trim().toLowerCase();
+            const items = document.querySelectorAll('#skinList .file-item');
+            let visible = 0;
+            items.forEach(item => {
+                const name = item.getAttribute('data-name').toLowerCase();
+                const meta = item.getAttribute('data-meta').toLowerCase();
+                const match = name.includes(keyword) || meta.includes(keyword);
+                if (keyword === '' || match) {
+                    item.style.display = 'flex';
+                    visible++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            document.getElementById('skinCount').textContent = '共 ' + visible + ' 个文件';
+            document.getElementById('skinNoResult').style.display = (keyword !== '' && visible === 0) ? 'block' : 'none';
+        }
+
+        function clearSkinSearch() {
+            document.getElementById('skinSearch').value = '';
+            filterSkin();
+        }
+
+        // ===== Android Room 搜索 =====
+        function filterAndroid() {
+            const keyword = document.getElementById('androidSearch').value.trim().toLowerCase();
+            const items = document.querySelectorAll('#androidList .file-item');
+            let visible = 0;
+            items.forEach(item => {
+                const name = item.getAttribute('data-name').toLowerCase();
+                const meta = item.getAttribute('data-meta').toLowerCase();
+                const match = name.includes(keyword) || meta.includes(keyword);
+                if (keyword === '' || match) {
+                    item.style.display = 'flex';
+                    visible++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            document.getElementById('androidCount').textContent = '共 ' + visible + ' 个文件';
+            document.getElementById('androidNoResult').style.display = (keyword !== '' && visible === 0) ? 'block' : 'none';
+        }
+
+        function clearAndroidSearch() {
+            document.getElementById('androidSearch').value = '';
+            filterAndroid();
+        }
+
+        // ===== Font Room 搜索 =====
+        function filterFont() {
+            const keyword = document.getElementById('fontSearch').value.trim().toLowerCase();
+            const items = document.querySelectorAll('#fontList .file-item');
+            let visible = 0;
+            items.forEach(item => {
+                const name = item.getAttribute('data-name').toLowerCase();
+                const meta = item.getAttribute('data-meta').toLowerCase();
+                const match = name.includes(keyword) || meta.includes(keyword);
+                if (keyword === '' || match) {
+                    item.style.display = 'flex';
+                    visible++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            document.getElementById('fontCount').textContent = '共 ' + visible + ' 个文件';
+            document.getElementById('fontNoResult').style.display = (keyword !== '' && visible === 0) ? 'block' : 'none';
+        }
+
+        function clearFontSearch() {
+            document.getElementById('fontSearch').value = '';
+            filterFont();
+        }
+    </script>
+
+</body>
+</html>
