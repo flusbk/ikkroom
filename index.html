@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ikkcloudroom</title>
+    <style>
+        @font-face {
+            font-family: 'MyFont';
+            src: url('https://jsd.onmicrosoft.cn/gh/flusbk/font/letters%202.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 5vh;
+            box-sizing: border-box;
+            font-family: 'MyFont', 'Georgia', serif;
+        }
+
+        .avatar-wrapper {
+            width: 165px;
+            height: 165px;
+            border-radius: 50%;
+            padding: 2px;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 1px #d1d5db;
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 50px;
+            font-weight: 900;
+            color: #000000;
+            margin-top: 12px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 25px;
+            color: #666B72;
+            font-weight: bold;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .room-name {
+            font-size: 35px;
+            font-weight: 900;
+            color: #000000;
+            margin-top: 30px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle2 {
+            font-size: 30px;
+            color: #000000;
+            font-weight: normal;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle3 {
+            font-size: 30px;
+            color: #666B72;
+            font-weight: normal;
+            margin-top: 2px;
+            letter-spacing: 1px;
+        }
+
+        /* 框1 */
+        .box {
+            width: 900px;
+            min-height: 450px;
+            background-color: #ffffff;
+            border: 2px solid #ECECEC;
+            border-radius: 30px;
+            margin-top: 16px;
+            position: relative;
+            box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+        }
+
+        .box-title {
+            font-weight: bold;
+            color: #000000;
+            font-size: 35px;
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            margin: 0;
+        }
+
+        .box-text {
+            font-size: 30px;
+            color: #666B72;
+            position: absolute;
+            top: 100px;
+            left: 28px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .box-footer {
+            font-size: 25px;
+            color: #9DA2A9;
+            position: absolute;
+            bottom: 50px;
+            left: 28px;
+            margin: 0;
+        }
+
+        /* 框2 */
+        .box2 {
+            width: 900px;
+            min-height: 150px;
+            background-color: #ffffff;
+            border: 2px solid #ECECEC;
+            border-radius: 30px;
+            margin-top: 16px;
+            position: relative;
+            box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+        }
+
+        .box2-title {
+            font-weight: bold;
+            color: #000000;
+            font-size: 30px;
+            position: absolute;
+            top: 25px;
+            left: 45px;
+            margin: 0;
+        }
+
+        .box2-text {
+            font-size: 25px;
+            color: #666B72;
+            position: absolute;
+            top: 80px;
+            left: 45px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .box2-btn {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #FBFBFB;
+            border: 2px solid #ECECEC;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 24px;
+            color: #666B72;
+            cursor: default;
+        }
+		/* 框3 */
+.box3 {
+    width: 900px;
+    min-height: 150px;
+    background-color: #ffffff;
+    border: 2px solid #ECECEC;
+    border-radius: 30px;
+    margin-top: 16px;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+}
+
+.box3-title {
+    font-weight: bold;
+    color: #000000;
+    font-size: 30px;
+    position: absolute;
+    top: 25px;
+    left: 45px;
+    margin: 0;
+}
+
+.box3-text {
+    font-size: 25px;
+    color: #666B72;
+    position: absolute;
+    top: 80px;
+    left: 45px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.box3-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #FBFBFB;
+    border: 2px solid #ECECEC;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 24px;
+    color: #666B72;
+    cursor: default;
+}
+/* 框4 */
+.box4 {
+    width: 900px;
+    min-height: 150px;
+    background-color: #ffffff;
+    border: 2px solid #ECECEC;
+    border-radius: 30px;
+    margin-top: 16px;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(245, 245, 245, 1);
+}
+
+.box4-title {
+    font-weight: bold;
+    color: #000000;
+    font-size: 30px;
+    position: absolute;
+    top: 25px;
+    left: 45px;
+    margin: 0;
+}
+
+.box4-text {
+    font-size: 25px;
+    color: #666B72;
+    position: absolute;
+    top: 80px;
+    left: 45px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.box4-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #FBFBFB;
+    border: 2px solid #ECECEC;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 24px;
+    color: #666B72;
+    cursor: default;
+}
+.cloud-room {
+    font-size: 25px;
+    color: #9DA2A9;
+    margin-top: 25px;      /* 和框的间距 */
+    letter-spacing: 1px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="avatar-wrapper">
+        <img src="https://i.postimg.cc/SNMsSWm4/E7D16090-CFD3-4967-A37D-C5213E229B62.jpg" alt="头像">
+    </div>
+
+    <div class="name">ikk</div>
+    <div class="subtitle">仅供观赏アーカイブ / for viewing only</div>
+    <div class="room-name">イククルーム</div>
+    <div class="subtitle2">りんご、アンドロイドの保管室です。</div>
+    <div class="subtitle3">soft archive / ios document / private storage</div>
+
+    <!-- 框1 -->
+    <div class="box">
+        <div class="box-title">ご案内</div>
+        <div class="box-text">
+            仅供イッコ雲室内成员个人使用。<br>
+            禁止商用、搬运、二传、倒卖及二次发布。<br>
+            系统请自行改适配。<br>
+            不受理转系统；有需求请善用搜索，微博内uu分享的教程。
+        </div>
+        <div class="box-footer">for personal use only · repost / resale prohibited</div>
+    </div>
+
+    <!-- 框2 -->
+    <div class="box2">
+        <div class="box2-title">Skin Room</div>
+        <div class="box2-text">ios皮肤文件</div>
+        <div class="box2-btn">0 files</div>
+    </div>
+<!-- 框3 -->
+<div class="box3">
+    <div class="box3-title">Android Room</div>
+    <div class="box3-text">安卓皮肤文件</div>
+    <div class="box3-btn">0 files</div>
+</div>
+<!-- 框4 -->
+<div class="box4">
+    <div class="box4-title">Font Room</div>
+    <div class="box4-text">字体文件</div>
+    <div class="box4-btn">0 files</div>
+</div>
+<div class="cloud-room">Cloud Room · members only</div>
+
+</body>
+</html>
